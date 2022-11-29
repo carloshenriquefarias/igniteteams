@@ -9,7 +9,11 @@ import {useState} from 'react'
 
 export function Groups() {
 
-  const [groups, setGroups] = useState<string[]>(['Os Bons', 'Familia', 'Amigos'])
+  const [groups, setGroups] = useState<string[]>(
+    [
+      // 'Os Bons', 'Familia', 'Amigos'
+    ]
+  )
 
   return (
     <Container>
@@ -33,11 +37,11 @@ export function Groups() {
       />
 
       {/* <Button
-        title='Criar uma nova turma'
+        title="Criar uma nova turma"
+        type='PRIMARY'
         // onPress={}
       /> */}
-
-      {/* <GroupCard title="Galera dos BONS" /> */}
+      
     </Container>
   );
 }

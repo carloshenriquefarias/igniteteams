@@ -8,7 +8,6 @@ type Props = {
     type: ButtonTypeStyleProps
 }
 
-
 export const Container = styled(TouchableOpacity)<Props>`
     flex: 1;
     width: 56px;
