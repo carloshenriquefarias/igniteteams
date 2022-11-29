@@ -8,25 +8,30 @@ type Props = {
     type: ButtonTypeStyleProps
 }
 
-export const Container = styled(TouchableOpacity)<Props>`
+export const Container = styled.View`
     flex: 1;
     width: 56px;
-    min-height: 56px;
-    max-height: 56px;
-    //Mudando a cor do botão
-    background-color: ${({theme, type}) => 
-        type === 'PRIMARY' ? theme.COLORS.GREEN_700 : 
-        theme.COLORS.RED_DARK}
-    ;    
-    border-radius: 6px;    
+    /* min-height: 56px;
+    max-height: 56px; */
+   
+    background-color: ${({theme}) => 
+        theme.COLORS.GRAY_600};    
+    /* border-radius: 6px;    
     justify-content: center;
-    align-items: center;
-/* 
+    align-items: center; */
+
     padding: 24px;
-    margin-bottom: 12px; */
+    /* margin-bottom: 12px; */
 `;
 
 export const Title = styled.Text`
+  text-align: center;
+  font-size: ${({theme}) => theme.FONT_SIZE.MD}px;
+  font-family: ${({theme}) => theme.FONT_FAMILY.BOLD}px;
+  color: ${({theme}) => theme.COLORS.WHITE};
+`;
+
+export const Content = styled.View`
   text-align: center;
   font-size: ${({theme}) => theme.FONT_SIZE.MD}px;
   font-family: ${({theme}) => theme.FONT_FAMILY.BOLD}px;
