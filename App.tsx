@@ -3,6 +3,7 @@ import {ActivityIndicator, StatusBar} from 'react-native'
 import theme from './src/theme';
 import { Groups } from '@screens/Groups';
 import { NewGroups } from '@screens/NewGroup';
+import { Players } from '@screens/Players';
 import { useFonts,Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { Loading } from '@components/Loading';
 
@@ -17,7 +18,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />   
-      { fontLoaded ? <Groups/> : <Loading/> } 
+      { fontLoaded ? <Players/> : <Loading/> } 
     </ThemeProvider>
     
   );
