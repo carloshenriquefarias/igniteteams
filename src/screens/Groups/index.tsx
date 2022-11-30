@@ -36,11 +36,11 @@ export function Groups() {
         ListEmptyComponent={() => <ListEmpty message='Que tal cadastrar a primeira turma?'/>}
       />
 
-      {/* <Button
+      <Button
         title="Criar uma nova turma"
         type='PRIMARY'
         // onPress={}
-      /> */}
+      />
       
     </Container>
   );
