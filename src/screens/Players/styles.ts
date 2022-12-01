@@ -30,9 +30,11 @@ export const HeaderList = styled.View`
 export const NumbersOfPlayers = styled.Text`    
     ${({ theme }) => css`
         font-family: ${theme.FONT_FAMILY.BOLD};
-        font-size: ${theme.FONT_SIZE.SM}px;
+        font-size: ${theme.FONT_SIZE.MD}px;
         color: ${theme.COLORS.GRAY_200};
     `};
+    padding-right: 21px;
+  
 `;
 
 
