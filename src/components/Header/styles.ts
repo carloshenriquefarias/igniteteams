@@ -6,6 +6,7 @@ export const Container = styled.View`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    margin-top: 15px;
 `;
 
 export const Logo = styled.Image`
