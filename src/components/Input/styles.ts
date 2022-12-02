@@ -16,7 +16,7 @@ export const Container = styled(TextInput)`
     ${({theme}) => css`
         color: ${theme.COLORS.WHITE};
         background-color: ${
-            theme.COLORS.GRAY_600}
+            theme.COLORS.GRAY_500}
         ;         
         font-family: ${theme.FONT_FAMILY.REGULAR}px;
         font-size: ${theme.FONT_SIZE.MD}px;

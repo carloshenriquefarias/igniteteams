@@ -9,16 +9,20 @@ import { Highlight } from '@components/Highlight';
 import { Input } from '@components/Input';
 import { FlatList } from 'react-native';
 import { useState } from 'react';
+import { useRoute } from '@react-navigation/native'; //Navegação
 
-// type Props = TouchableOpacityProps & {
-//     title: string;
-//     type?: ButtonTypeStyleProps;
-// }
+type RouteParams = {
+    group: string; 
+}
 
 export function Players(){
 
     const [team, setTeam] = useState('Time A')
     const [players, setPlayers] = useState([])
+
+    const route = useRoute()
+    const {group} = route.params as RouteParams
+
 
     return(
         <Container>        
@@ -26,7 +30,7 @@ export function Players(){
             
                 {/* <Icon/> */}
                 <Highlight
-                    title="Nome da turma"
+                    title={group}
                     subtitle='Adicione a galera e separe os times'
                 />
 
