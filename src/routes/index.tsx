@@ -6,10 +6,10 @@ import { AppRoutes } from './app.routes';
 
 export function Routes() {
 
-  const { COLORS } = useTheme();
+  const { COLORS } = useTheme(); //evitar que a tela pisque ao trocar a tela usando a View
 
   return (
-    <View style={{ flex: 1, backgroundColor: COLORS.GRAY_600 }}>
+    <View style={{ flex: 1, backgroundColor: COLORS.GRAY_500 }}> 
       <NavigationContainer>
         <AppRoutes />
       </NavigationContainer>

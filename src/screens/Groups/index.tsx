@@ -1,4 +1,4 @@
-import { FlatList } from 'react-native';
+import { FlatList, Alert} from 'react-native';
 // import { useNavigation } from '@react-navigation/native';
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
@@ -6,8 +6,10 @@ import { GroupCard } from '@components/GroupCard';
 import { ListEmpty } from '@components/ListEmpty';
 import { Button } from '@components/Button';
 import {Container } from './styles';
-import {useState} from 'react'
-import { useNavigation } from '@react-navigation/native'; //Navegação
+import {useState, useEffect, useCallback} from 'react'
+import { useNavigation, useFocusEffect } from '@react-navigation/native'; //Navegação
+import { groupsGetAll } from '@storage/group/groupsGetAll';
+import { AppError } from '@utils/AppError';
 
 // Fazer as navegações nas paginas usando os types abaixo + importação:
 type RootParamList = {
@@ -31,6 +33,26 @@ export function Groups() {
   function handleNewGroup(){
     navigation.navigate('new') //Definir os tipos de navegação no @types
   }
+
+  async function fetchGroups(){ //Busca os grupos ja cadastrados
+    try {
+      const data = await groupsGetAll()
+      setGroups(data)
+
+    } catch (error) {
+      if (error instanceof AppError){
+        Alert.alert('Novo Grupo', error.message)
+      } else {
+      Alert.alert('Novo Grupo', 'Não foi possível criar um novo grupo')
+      // console.log(error)
+      // throw error;
+      }
+    }
+  }
+
+  useFocusEffect(useCallback(() => { //Listando grupos cadastrados na tela principal
+    fetchGroups()
+  }, []));
 
   return (
     <Container>
