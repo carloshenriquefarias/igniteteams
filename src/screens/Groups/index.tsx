@@ -1,5 +1,4 @@
 import { FlatList, Alert} from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
 import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { GroupCard } from '@components/GroupCard';
@@ -10,6 +9,7 @@ import {useState, useEffect, useCallback} from 'react'
 import { useNavigation, useFocusEffect } from '@react-navigation/native'; //Navegação
 import { groupsGetAll } from '@storage/group/groupsGetAll';
 import { AppError } from '@utils/AppError';
+import { Loading } from '@components/Loading';
 
 // Fazer as navegações nas paginas usando os types abaixo + importação:
 type RootParamList = {
@@ -22,11 +22,8 @@ type RootParamList = {
 
 export function Groups() {
 
-  const [groups, setGroups] = useState<string[]>(
-    [
-      // 'Os Bons', 'Familia', 'Amigos'
-    ]
-  )
+  const [groups, setGroups] = useState<string[]>([])
+  const [isLoading, setIsLoading] = useState(true);
 
   const navigation = useNavigation()
 
@@ -34,19 +31,21 @@ export function Groups() {
     navigation.navigate('new') //Definir os tipos de navegação no @types
   }
 
-  async function fetchGroups(){ //Busca os grupos ja cadastrados
+  async function fetchGroups(){ //Busca os grupos ja cadastrados (CARREGAMENTO DOS GRUPOS)
     try {
+      setIsLoading(true)
       const data = await groupsGetAll()
-      setGroups(data)
+      setGroups(data)      
 
     } catch (error) {
       if (error instanceof AppError){
         Alert.alert('Novo Grupo', error.message)
       } else {
-      Alert.alert('Novo Grupo', 'Não foi possível criar um novo grupo')
-      // console.log(error)
-      // throw error;
+        Alert.alert('Novo Grupo', 'Não foi possível criar um novo grupo')      
       }
+
+    } finally{
+      setIsLoading(false)
     }
   }
 
@@ -67,19 +66,20 @@ export function Groups() {
         subtitle= "Jogue com a sua turma"
       />
 
-      <FlatList
-        data={groups}
-        keyExtractor={item => item}
-        renderItem={({item}) => (
-          <GroupCard 
-            title={item}
-            onPress={() => handleOpenGroup (item)}
-          />
-        )}
-        contentContainerStyle={groups.length === 0 && {flex: 1}}
-        ListEmptyComponent={() => <ListEmpty message='Que tal cadastrar a primeira turma?'/>}
-      />
-
+      { isLoading ? <Loading/> :
+        <FlatList
+          data={groups}
+          keyExtractor={item => item}
+          renderItem={({item}) => (
+            <GroupCard 
+              title={item}
+              onPress={() => handleOpenGroup (item)}
+            />
+          )}
+          contentContainerStyle={groups.length === 0 && {flex: 1}}
+          ListEmptyComponent={() => <ListEmpty message='Que tal cadastrar a primeira turma?'/>}
+        />
+      }
       <Button
         title="Criar uma nova turma"
         type='PRIMARY'
